@@ -1,152 +1,81 @@
 # UpRegScan
-Конечно, вот улучшенная, структурированная и форматированная версия `README.md` для **UpRegScan** — с заголовками, списками, форматированным кодом и ясной логикой разделов:
+UpRegScan 🧬
+Upstream Region & Promoter Scanner for Prokaryotic Genomes
 
----
+Characterize transcriptional frontiers of genes in bacterial genomes
 
-# 🧬 UpRegScan
+🚀 Overview
+UpRegScan is a powerful Python tool designed for the in-depth analysis of upstream regulatory regions in prokaryotic genomes. It helps researchers understand the transcriptional landscape of bacterial genes by:
 
-### *Upstream Region & Promoter Scanner for Prokaryotic Genomes*
+Calculating Upstream Distances: Determines the precise distances from gene start codons to their nearest upstream genomic boundaries, considering gene orientation and potential overlaps.
+Identifying Leaderless Transcripts: Flags potential leaderless mRNA candidates by identifying genes with very short upstream regions (typically less than 10 bp).
+Discovering Promoter Motifs: Scans upstream sequences for canonical -10 and -35 promoter box motifs, characteristic of Sigma-A factor-dependent transcription (e.g., in Bacillus subtilis and E. coli).
+Visualizing Upstream Length Distributions: Generates informative plots to visualize the distribution of upstream region lengths across different organisms.
+Correlating Upstream Lengths with Gene Features: Explores relationships between upstream region lengths, gene lengths, and predicted gene functions (products).
 
-> **Characterize transcriptional frontiers of genes in bacterial genomes**
+💡 Applications
+UpRegScan is a valuable resource for various bioinformatics and microbiology research areas, including:
 
----
+Transcriptional Unit Architecture Analysis: Gain insights into how genes are organized and regulated at the transcriptional level in bacteria.
+Genome Packaging Studies: Identify characteristics indicative of densely packed genomes, where intergenic regions are minimal.
+Gene Expression Promoter Identification: Pinpoint potential promoter sequences that could be crucial for gene expression studies or synthetic biology applications.
+Leaderless mRNA Research: Facilitate the investigation and identification of genes likely to be translated from leaderless mRNAs, which lack a 5' untranslated region (UTR).
+🛠️ Installation
+Dependencies
+Before you can use UpRegScan, ensure you have the following Python libraries installed. You can install them using pip:
 
-## 🚀 Overview
+Bash
 
-**UpRegScan** — это мощный инструмент на Python для анализа upstream-регуляторных регионов в прокариотических геномах. Он помогает понять архитектуру транскрипции бактериальных генов путём:
-
-* 📏 **Расчёта длины upstream-регионов** с учётом ориентации гена и возможных перекрытий.
-* 🎯 **Выявления leaderless транскриптов** — генов с коротким (<10 п.н.) upstream.
-* 🧬 **Поиска промоторных мотивов** (-10 и -35 box) для σ⁷⁰ (sigma-A).
-* 📊 **Визуализации распределения** длины upstream-регионов.
-* 🔗 **Анализа связи upstream-длины** с длиной и функцией генов.
-
----
-
-## 💡 Applications
-
-UpRegScan будет полезен в следующих задачах:
-
-* 🧠 **Анализ архитектуры транскрипционных единиц**
-* 📦 **Оценка плотности упаковки генома**
-* 🔬 **Поиск промоторов для экспрессии / синтетической биологии**
-* 🧪 **Изучение leaderless мРНК** и механизмов их трансляции
-
----
-
-## 🛠️ Installation
-
-### 📦 Зависимости
-
-Установите нужные библиотеки:
-
-```bash
 pip install pandas matplotlib seaborn requests tqdm
-```
+Cloning the Repository
+To get started, clone the UpRegScan repository to your local machine:
 
----
+Bash
 
-## 📥 Cloning the Repository
-
-```bash
 git clone https://github.com/your-username/UpRegScan.git
 cd UpRegScan
-```
+(Note: Replace your-username with your actual GitHub username.)
 
-> 📝 *Замените `your-username` на свой GitHub-логин.*
 
----
+🚀 Usage
+(Here, you would typically add detailed instructions on how to run your script, including example commands, what input files are needed, and what output to expect. For instance, you could show how to execute main() from your script.)
 
-## ▶️ Usage
+Python
 
-### ⚙️ Быстрый запуск
-
-```bash
+# Example of how a user might run the analysis after setting up
+# (Assuming your script is named `upregscan_script.py`)
 python upregscan_script.py
-```
+Customizing Organisms
+The ORGANISMS dictionary within the script (upregscan_script.py in the example above) defines the bacterial genomes to be analyzed. You can easily modify this dictionary to include or exclude organisms by updating their NCBI FASTA and GFF URLs.
 
-> 📁 Это автоматически скачает FASTA и GFF файлы, выполнит парсинг, анализ и визуализацию.
+Python
 
----
-
-### ⚙️ Кастомизация организмов
-
-В файле `upregscan_script.py` можно изменить словарь `ORGANISMS`, чтобы проанализировать другие геномы:
-
-```python
+# Example from your code:
 ORGANISMS = {
     "Thermus thermophilus": {
-        "fasta_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/...",
-        "gff_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/..."
+        "fasta_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/016/865/295/GCF_016865295.1_ASM1686529v1/GCF_016865295.1_ASM1686529v1_genomic.fna.gz",
+        "gff_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/016/865/295/GCF_016865295.1_ASM1686529v1/GCF_016865295.1_ASM1686529v1_genomic.gff.gz"
     },
-    # Добавьте другие организмы по необходимости
+    # ... more organisms
 }
-```
+📈 Output
+UpRegScan generates both textual statistics and graphical visualizations:
 
----
+Statistical Report
+A detailed statistical report is printed to the console, providing insights into:
 
-## 📈 Output
+Total number of genes analyzed.
+Counts and percentages of genes with upstream regions greater than specified thresholds (e.g., 10, 50, 100, 200 bp).
+The number and percentage of genes with zero-length upstream regions (indicating overlaps or very tight packing).
+The count and percentage of potential leaderless transcripts (upstream &lt; 10 bp).
+Average upstream region length.
+The number and percentage of genes identified with both -10 and -35 promoter motifs.
+A sample of unique gene products found.
+Visualizations
+The tool generates several plots to visually represent the data, including:
 
-### 📊 Статистический отчёт
-
-Будет напечатан в консоль, включая:
-
-* Общее количество генов
-* Процент генов с upstream-длиной ≥ 10, 50, 100, 200 п.н.
-* Количество leaderless транскриптов (upstream < 10 п.н.)
-* Средняя длина upstream-региона
-* Количество найденных промоторов (-35 и -10)
-* Примеры уникальных продуктов генов
-
----
-
-### 🖼️ Визуализации
-
-UpRegScan автоматически строит следующие графики:
-
-* 📊 **Гистограмма** upstream-длин (с логарифмической шкалой)
-* 📦 **Boxplot** длины upstream
-* 🎻 **Violin plot** по продуктам генов (если доступны)
-* 🧮 **Scatter plot**: длина гена vs длина upstream
-
----
-
-## 🤝 Contributing
-
-Мы рады вкладу от сообщества! Чтобы внести изменения:
-
-1. Fork этого репозитория.
-2. Создайте ветку:
-
-   ```bash
-   git checkout -b feature/YourFeatureName
-   ```
-3. Внесите изменения и закоммитьте:
-
-   ```bash
-   git commit -m "Add YourFeatureName"
-   ```
-4. Отправьте на GitHub:
-
-   ```bash
-   git push origin feature/YourFeatureName
-   ```
-5. Откройте Pull Request ✨
-
----
-
-## 📜 License
-
-MIT License
-
----
-
-## ✍️ Author
-
-**Александра**
-*Bioinformatics & Regulatory Genomics*
-GitHub: \[your-username]
-Email: (опционально)
-
----
+Histogram of Upstream Lengths: Shows the distribution of upstream region lengths for each organism, often with a logarithmic y-axis for better visibility of shorter regions.
+Boxplot of Upstream Lengths: Provides a summary of the central tendency and spread of upstream lengths across different organisms.
+Violin Plot of Upstream Lengths (Optional): If gene product information is sufficiently extracted, this plot can show the distribution of upstream lengths, potentially grouped by functional categories or organisms.
+Scatter Plot: Gene Length vs. Upstream Length: Illustrates any correlation between the length of a gene and the length of its upstream region, using logarithmic scales for both axes.
 
